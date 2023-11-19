@@ -1,19 +1,17 @@
+# Use an official Node.js runtime as a base image
 FROM node:16
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+# Copy the contents of the "dist" directory into the container
+COPY dist/ .
 
-# Install app dependencies
-RUN npm install --production
-
-# Copy the transpiled/bundled code into the container
-COPY dist ./dist
+# Install production dependencies (if applicable)
+# RUN npm install --production
 
 # Expose the port your app runs on
 EXPOSE 3000
 
 # Define the command to run your app
-CMD ["node", "./dist/index.js"]
+CMD ["node", "index.js"]
